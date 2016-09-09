@@ -15,10 +15,22 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
+from snippets import views
+from rest_framework.routers import DefaultRouter
 
-urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^', include('snippets.urls')),
-    url(r'^api-auth/',include('rest_framework.urls',namespace='rest_franework')),
+
+""" DefaultRouter creates the api root automatically 
+    And also explicitly setting the api is not needed
+"""
+
+router=DefaultRouter()
+router.register(r'snippets',views.SnippetViewSet)
+router.register(r'users',views.UserViewSet)
+
+
+
+urlpatterns=[
+    url(r'^',include(router.urls)),
+    url(r'^api-auth/',include('rest_framework.urls',namespace='rest_framework')),
 ]
 
