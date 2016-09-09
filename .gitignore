@@ -140,3 +140,6 @@ fabric.properties
 
 #SQLlite databases
 *.sqlite3
+
+#Patches
+*.patch
